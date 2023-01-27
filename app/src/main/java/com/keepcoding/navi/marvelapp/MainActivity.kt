@@ -6,10 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.keepcoding.navi.marvelapp.ui.Screens
+import com.keepcoding.navi.marvelapp.ui.detail.ScreenDetail
+import com.keepcoding.navi.marvelapp.ui.home.ScreenHome
 import com.keepcoding.navi.marvelapp.ui.theme.MarvelAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,22 +27,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    val navController = rememberNavController()
+
+                    NavHost(navController = navController, startDestination = Screens.Home.route){
+
+                        composable(Screens.Home.route){
+                            ScreenHome(){ heroId ->
+                                navController.navigate(Screens.Detail.createRoute(heroId))
+                            }
+                        }
+
+                        composable(Screens.Detail.route, arguments = listOf(
+                            navArgument(Screens.Detail.ARG_HERO_ID){type = NavType.IntType}
+                        )){
+                            val heroId = it.arguments?.getInt(Screens.Detail.ARG_HERO_ID) ?: -1
+                            ScreenDetail(heroId){
+                                navController.navigateUp()
+                            }
+                        }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MarvelAppTheme {
-        Greeting("Android")
     }
 }
