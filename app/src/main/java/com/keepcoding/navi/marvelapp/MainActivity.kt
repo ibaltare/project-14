@@ -16,7 +16,9 @@ import com.keepcoding.navi.marvelapp.ui.Screens
 import com.keepcoding.navi.marvelapp.ui.detail.ScreenDetail
 import com.keepcoding.navi.marvelapp.ui.home.ScreenHome
 import com.keepcoding.navi.marvelapp.ui.theme.MarvelAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
