@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
     suspend fun getCharacters(): Flow<List<Hero>>
-    suspend fun setFavorite(like: Boolean)
+    suspend fun setFavorite(id: Int)
     suspend fun deleteLocalData()
 }

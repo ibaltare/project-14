@@ -36,14 +36,14 @@ class HomeRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun setFavorite(like: Boolean) {
-        TODO("Not yet implemented")
+    override suspend fun setFavorite(id: Int) {
+        val character = localDataSource.getCharacterById(id)
+        character.favorite = !character.favorite
+        localDataSource.updateCharacter(character)
     }
-
-    /*override suspend fun getRemoteCharacters(offset: Int, limit: Int): Flow<List<Hero>> {
-        val result = remoteDataSource.getCharacters(20,20)
-    }*/
 
     override suspend fun deleteLocalData() {
+        localDataSource.deleteAll()
     }
+
 }

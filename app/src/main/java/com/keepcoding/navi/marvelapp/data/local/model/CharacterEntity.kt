@@ -10,5 +10,5 @@ data class CharacterEntity(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "thumbnail") val thumbnail: String,
     @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "favorite") val favorite: Boolean
+    @ColumnInfo(name = "favorite") var favorite: Boolean
 )

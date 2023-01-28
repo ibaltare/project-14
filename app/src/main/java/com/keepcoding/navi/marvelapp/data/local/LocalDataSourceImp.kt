@@ -21,4 +21,8 @@ class LocalDataSourceImp @Inject constructor(private val dao: CharacterDAO): Loc
     override suspend fun getCharacterById(id: Int): CharacterEntity {
         return dao.getCharacterById(id)
     }
+
+    override suspend fun updateCharacter(characterEntity: CharacterEntity) {
+        dao.updateCharacter(characterEntity)
+    }
 }

@@ -34,15 +34,15 @@ fun ScreenHome(viewModel: HomeViewModel = hiltViewModel(),showDetail: (Int)->(Un
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = { Text(text = "Marvel Heroes")}) },
-        content = { ListHero( heros.value, showDetail )}
+        content = { ListHero( heros.value, showDetail){id -> viewModel.setFavorite(id)}}
     )
 }
 
 @Composable
-fun ListHero(heroes: List<Hero>, showDetail: (Int) -> Unit){
+fun ListHero(heroes: List<Hero>, showDetail: (Int) -> Unit, setFavorite: (Int) -> Unit){
     LazyColumn {
         items(heroes.size){
-            ItemHero(hero = heroes[it], onItemclicked = showDetail)
+            ItemHero( heroes[it],  showDetail, setFavorite)
             Divider()
         }
     }
@@ -50,7 +50,7 @@ fun ListHero(heroes: List<Hero>, showDetail: (Int) -> Unit){
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ItemHero(hero: Hero, onItemclicked: (Int) -> Unit){
+fun ItemHero(hero: Hero, onItemclicked: (Int) -> Unit, setFavorite: (Int) -> Unit){
     /**
      * Componente para crear listas verticales de texto o imagenes
      * es un template con funcionamiento basico para crear una lista simple
@@ -68,7 +68,7 @@ fun ItemHero(hero: Hero, onItemclicked: (Int) -> Unit){
             contentScale = ContentScale.Crop
         )},
         trailing = {
-            OutlinedButton(onClick = { /*TODO*/ },
+            OutlinedButton(onClick = { setFavorite(hero.id) },
                 modifier = Modifier.size(50.dp),
                 shape = CircleShape,
                 contentPadding = PaddingValues(0.dp)

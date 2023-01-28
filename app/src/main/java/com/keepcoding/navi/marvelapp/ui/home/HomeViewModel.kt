@@ -37,4 +37,12 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
                 }
         }
     }
+
+    fun setFavorite(id: Int){
+        Log.d("SET_FAVORITE",id.toString())
+        viewModelScope.launch {
+            repository.setFavorite(id)
+        }
+
+    }
 }

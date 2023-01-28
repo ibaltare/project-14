@@ -9,4 +9,5 @@ interface LocalDataSource {
     fun getCharacters(): Flow<List<CharacterEntity>>
     suspend fun deleteAll()
     suspend fun getCharacterById(id: Int): CharacterEntity
+    suspend fun updateCharacter(characterEntity: CharacterEntity)
 }
