@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,11 +30,11 @@ import com.keepcoding.navi.marvelapp.ui.theme.Like
 fun ScreenHome(viewModel: HomeViewModel = hiltViewModel(),showDetail: (Int)->(Unit) = {}){
     val scaffoldState = rememberScaffoldState()
     //val scope = rememberCoroutineScope()
-
+    val heros = viewModel.heros.collectAsState()
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = { Text(text = "Marvel Heroes")}) },
-        content = { ListHero( FakeData.getFakeHeroes(), showDetail )}
+        content = { ListHero( heros.value, showDetail )}
     )
 }
 
