@@ -88,6 +88,12 @@ dependencies {
     //test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
+    testImplementation 'app.cash.turbine:turbine:0.12.1'
+    testImplementation("io.mockk:mockk:1.12.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0")
+    testImplementation("com.google.truth:truth:1.0")
+    
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     //noinspection GradleDependency
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
