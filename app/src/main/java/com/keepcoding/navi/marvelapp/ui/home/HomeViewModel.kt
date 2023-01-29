@@ -29,20 +29,27 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private fun getHeros() {
         viewModelScope.launch {
             repository.getCharacters().flowOn(Dispatchers.IO)
-                .catch {  }
                 .collect {
-                    println( it.toString())
-                    Log.d("GET_HERO",it.toString())
                     _heros.value = it
                 }
         }
     }
 
     fun setFavorite(id: Int){
-        Log.d("SET_FAVORITE",id.toString())
         viewModelScope.launch {
-            repository.setFavorite(id)
+            withContext(Dispatchers.IO){
+                repository.setFavorite(id)
+            }
         }
-
     }
+
+    fun cleanAndReload(){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                repository.deleteLocalData()
+            }
+            getHeros()
+        }
+    }
+
 }
