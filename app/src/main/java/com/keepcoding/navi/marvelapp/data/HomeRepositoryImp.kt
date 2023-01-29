@@ -20,9 +20,9 @@ class HomeRepositoryImp @Inject constructor(
 ): HomeRepository {
 
     override suspend fun getCharacters(): Flow<List<Hero>> {
-        if (localDataSource.size() < 1){
+        return if (localDataSource.size() < 1){
             val result = remoteDataSource.getCharacters(20,20)
-            return when{
+            when{
                 result.isSuccess -> {
                     localDataSource.saveCharacters(entityMapper.dtoMap(result.getOrThrow()))
                     flow { emit(result.getOrThrow()) }.map { presentationMapper.dtoMap(it) }
@@ -32,7 +32,7 @@ class HomeRepositoryImp @Inject constructor(
                 }
             }
         }else{
-            return localDataSource.getCharacters().map { presentationMapper.entityMap(it) }
+            localDataSource.getCharacters().map { presentationMapper.entityMap(it) }
         }
     }
 

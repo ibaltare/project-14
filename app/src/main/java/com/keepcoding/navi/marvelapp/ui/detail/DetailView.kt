@@ -26,15 +26,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.keepcoding.navi.marvelapp.data.local.model.CharacterEntity
 import com.keepcoding.navi.marvelapp.domain.Comic
-import com.keepcoding.navi.marvelapp.ui.home.FakeData
 import com.keepcoding.navi.marvelapp.ui.theme.BackgroundColorText
 import com.keepcoding.navi.marvelapp.ui.theme.DetailCard
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview(showBackground = true)
 @Composable
-fun ScreenDetail( heroId: Int = -1, onBackClick: ()->(Unit) = {}){
-    val viewModel: DetailViewModel = hiltViewModel()
+fun ScreenDetail(heroId: Int = -1,viewModel: DetailViewModel = hiltViewModel(), onBackClick: ()->(Unit) = {}){
+    //val viewModel: DetailViewModel = hiltViewModel()
     val scaffoldState = rememberScaffoldState()
     val hero = viewModel.hero.collectAsState()
     val comics = viewModel.comics.collectAsState()
@@ -141,6 +140,4 @@ fun ItemComic(comic: Comic){
                     .background(BackgroundColorText))
         }
     }
-    
-    
 }

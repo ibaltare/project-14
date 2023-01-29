@@ -17,8 +17,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private val publicKey = "ab19437d9e0c64db15e1cfde58bda5ff"
-    private val privateKey = "2e0e92a65292dbbc2fb8262598c5ed12ece043ee"
+    private const val publicKey = "ab19437d9e0c64db15e1cfde58bda5ff"
+    private const val privateKey = "2e0e92a65292dbbc2fb8262598c5ed12ece043ee"
 
     @Provides
     fun provideMoshi(): Moshi {

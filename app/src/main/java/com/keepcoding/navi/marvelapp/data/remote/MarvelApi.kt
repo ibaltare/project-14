@@ -2,7 +2,6 @@ package com.keepcoding.navi.marvelapp.data.remote
 
 import com.keepcoding.navi.marvelapp.data.remote.response.CharacterDataWrapper
 import com.keepcoding.navi.marvelapp.data.remote.response.ComicDataWrapper
-import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
