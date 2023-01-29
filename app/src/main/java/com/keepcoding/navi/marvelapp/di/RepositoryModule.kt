@@ -1,10 +1,12 @@
 package com.keepcoding.navi.marvelapp.di
 
+import com.keepcoding.navi.marvelapp.data.DetailRepositoryImp
 import com.keepcoding.navi.marvelapp.data.HomeRepositoryImp
 import com.keepcoding.navi.marvelapp.data.local.LocalDataSource
 import com.keepcoding.navi.marvelapp.data.local.LocalDataSourceImp
 import com.keepcoding.navi.marvelapp.data.remote.RemoteDataSource
 import com.keepcoding.navi.marvelapp.data.remote.RemoteDataSourceImp
+import com.keepcoding.navi.marvelapp.domain.repository.DetailRepository
 import com.keepcoding.navi.marvelapp.domain.repository.HomeRepository
 import dagger.Binds
 import dagger.Module
@@ -22,4 +24,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindHomeRepository(homeRepositoryImp: HomeRepositoryImp): HomeRepository
+
+    @Binds
+    abstract fun bindDetailRepository(detailRepositoryImp: DetailRepositoryImp): DetailRepository
 }

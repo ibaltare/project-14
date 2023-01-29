@@ -12,7 +12,7 @@ data class ComicDataContainer (
 )
 
 data class ComicDTO (
-    @Json(name = "id") val id: Long,
+    @Json(name = "id") val id: Int,
     @Json(name = "title") val title: String,
     @Json(name = "variantDescription") val variantDescription: String,
     @Json(name = "description") val description: String? = null,

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,19 +22,24 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberAsyncImagePainter
 import com.keepcoding.navi.marvelapp.data.local.model.CharacterEntity
 import com.keepcoding.navi.marvelapp.domain.Comic
 import com.keepcoding.navi.marvelapp.ui.home.FakeData
-import com.keepcoding.navi.marvelapp.ui.home.ItemHero
 import com.keepcoding.navi.marvelapp.ui.theme.BackgroundColorText
 import com.keepcoding.navi.marvelapp.ui.theme.DetailCard
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Preview(showBackground = true)
 @Composable
-fun ScreenDetail(heroId: Int = -1, onBackClick: ()->(Unit) = {}){
+fun ScreenDetail( heroId: Int = -1, onBackClick: ()->(Unit) = {}){
+    val viewModel: DetailViewModel = hiltViewModel()
     val scaffoldState = rememberScaffoldState()
+    val hero = viewModel.hero.collectAsState()
+    val comics = viewModel.comics.collectAsState()
+    viewModel.getHero(heroId)
+    viewModel.getComics(heroId)
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -54,9 +58,9 @@ fun ScreenDetail(heroId: Int = -1, onBackClick: ()->(Unit) = {}){
                 .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                HeroDetail(FakeData.getCharacter())
+                HeroDetail(hero.value)
                 SectionDivider(title = "Comics")
-                ComicsView(FakeData.getFakeComics())
+                ComicsView(comics.value)
             }
         }
     )
@@ -132,7 +136,9 @@ fun ItemComic(comic: Comic){
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth().background(BackgroundColorText))
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(BackgroundColorText))
         }
     }
     
