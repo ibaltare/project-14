@@ -1,6 +1,5 @@
 package com.keepcoding.navi.marvelapp.fakes
 
-import com.keepcoding.navi.marvelapp.data.local.model.CharacterEntity
 import com.keepcoding.navi.marvelapp.data.remote.RemoteDataSource
 import com.keepcoding.navi.marvelapp.data.remote.response.CharacterDTO
 import com.keepcoding.navi.marvelapp.data.remote.response.ComicDTO

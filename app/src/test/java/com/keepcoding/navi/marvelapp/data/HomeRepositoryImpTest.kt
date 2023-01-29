@@ -1,7 +1,6 @@
 package com.keepcoding.navi.marvelapp.data
 
 import app.cash.turbine.test
-import com.keepcoding.navi.marvelapp.data.local.LocalDataSource
 import com.keepcoding.navi.marvelapp.data.mappers.EntityMapper
 import com.keepcoding.navi.marvelapp.data.mappers.PresentationMapper
 import com.keepcoding.navi.marvelapp.data.remote.RemoteDataSource
@@ -9,7 +8,6 @@ import com.keepcoding.navi.marvelapp.fakes.FakeLocalDataSource
 import com.keepcoding.navi.marvelapp.fakes.FakeRemoteDataSource
 import com.keepcoding.navi.marvelapp.utils.FakeData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
